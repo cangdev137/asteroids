@@ -12,6 +12,10 @@ def main():
     #set size of GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    #set framerate
+    clock = pygame.time.Clock()
+    dt = 0
+
     #main game loop
     while True:
         for event in pygame.event.get():
@@ -22,6 +26,8 @@ def main():
         
         #refresh
         pygame.display.flip()
+
+        dt = clock.tick(60) / 1000
 
 
 if __name__ == "__main__":
