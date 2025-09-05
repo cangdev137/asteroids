@@ -26,15 +26,16 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        #update player position based on input keys
+        player.update(dt)
+
+        #draw to GUI window
         screen.fill("black")
-        
         player.draw(screen)
-        
-
-        #refresh
         pygame.display.flip()
-        dt = clock.tick(60) / 1000
 
+        #refresh and update player model
+        dt = clock.tick(60) / 1000
 
 if __name__ == "__main__":
     main()
