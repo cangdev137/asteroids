@@ -3,21 +3,20 @@ from constants import *
 from player import Player
 
 def main():
-    print("Starting Asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
-    
     pygame.init()
-    print(f"initialized? {pygame.get_init()}")
 
     #set size of GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-    #set clock
     clock = pygame.time.Clock()
     dt = 0
 
+    #groups
+    drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+
+
     #create player model
+    Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
     #main game loop
@@ -26,12 +25,13 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        #update player position based on input keys
-        player.update(dt)
+        #update game models
+        updatable.update(dt)
 
         #draw to GUI window
         screen.fill("black")
-        player.draw(screen)
+        for model in drawable:
+            model.draw(screen)
         pygame.display.flip()
 
         #refresh and update player model
